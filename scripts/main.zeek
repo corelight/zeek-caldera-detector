@@ -26,7 +26,6 @@ event http_header(c: connection, is_orig: bool, original_name: string, name: str
     local method = c$http$method;
     local uri = c$http$uri;
 
-    # Check for Caldera beacon activity.
     if (method != "POST" && uri != "/file/download")
 		return;
 
