@@ -68,7 +68,7 @@ event http_message_done(c: connection, is_orig: bool, stat: http_message_stat) {
 
     # Check for Ragdoll C2 activity.
     if (method == "POST" && uri == "/weather") {
-        if (|user_agent| > 0 && /python-requests\/2\.32\.3/ in user_agent) {
+        if (|user_agent| > 0 && /python-requests\// in user_agent) {
             NOTICE([
                 $conn = c,
                 $note = Caldera::RagdollC2Detected,
