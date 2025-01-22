@@ -2,11 +2,7 @@ module Caldera;
 
 export {
     redef enum Notice::Type += {
-        Caldera::SandcatC2Detected,
-        Caldera::RagdollC2Detected,
-        Caldera::ManxTCPC2Detected,
-        Caldera::ManxUDPC2Detected,
-        Caldera::ManxUDPC2ReplyDetected,
+        Caldera::C2Detected,
         Caldera::SuspiciousFileDownload,
     };
 
@@ -67,8 +63,8 @@ event http_message_done(c: connection, is_orig: bool, stat: http_message_stat) {
         if (|user_agent| > 0 && /Go-http-client/ in user_agent) {
             NOTICE([
                 $conn = c,
-                $note = Caldera::SandcatC2Detected,
-                $msg = fmt("Potential beacon detected to %s with User-Agent '%s'", uri, user_agent),
+                $note = Caldera::C2Detected,
+                $msg = fmt("Potential Sandcat beacon detected to %s with User-Agent '%s'", uri, user_agent),
                 $identifier=c$uid
             ]);
             return;
@@ -80,7 +76,7 @@ event http_message_done(c: connection, is_orig: bool, stat: http_message_stat) {
         if (|user_agent| > 0 && /python-requests\// in user_agent) {
             NOTICE([
                 $conn = c,
-                $note = Caldera::RagdollC2Detected,
+                $note = Caldera::C2Detected,
                 $msg = fmt("Potential Ragdoll C2 activity detected: URI '%s', User-Agent '%s'", uri, user_agent),
                 $identifier=c$uid
             ]);
@@ -103,15 +99,15 @@ function manx_c2_match(state: signature_state, data: string, note: Notice::Type,
 
 function manx_tcp_c2_match(state: signature_state, data: string): bool &is_used
 	{
-    return manx_c2_match(state, data, Caldera::ManxTCPC2Detected, "Potential Manx TCP C2 activity detected.");
+    return manx_c2_match(state, data, Caldera::C2Detected, "Potential Manx TCP C2 activity detected.");
 	}
 
 function manx_udp_c2_match(state: signature_state, data: string): bool &is_used
 	{
-    return manx_c2_match(state, data, Caldera::ManxUDPC2Detected, "Potential Manx UDP C2 activity detected.");
+    return manx_c2_match(state, data, Caldera::C2Detected, "Potential Manx UDP C2 activity detected.");
 	}
 
 function manx_udp_c2_reply_match(state: signature_state, data: string): bool &is_used
 	{
-    return manx_c2_match(state, data, Caldera::ManxUDPC2ReplyDetected, "Potential Manx UDP C2 reply detected.");
+    return manx_c2_match(state, data, Caldera::C2Detected, "Potential Manx UDP C2 reply detected.");
 	}
