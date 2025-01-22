@@ -79,41 +79,30 @@ event http_message_done(c: connection, is_orig: bool, stat: http_message_stat) {
     }
 }
 
-function manx_tcp_c2_match(state: signature_state, data: string): bool &is_used
+function manx_c2_match(state: signature_state, data: string, note: Notice::Type, msg: string): bool &is_used
 	{
     NOTICE([
         $conn = state$conn,
-        $note = Caldera::ManxTCPC2Detected,
-        $msg = "Potential Manx TCP C2 activity detected.",
+        $note = note,
+        $msg = msg,
         $sub = data,
-        $identifier=state$conn$uid
+        $identifier = state$conn$uid
     ]);
 
     return T;
+	}
+
+function manx_tcp_c2_match(state: signature_state, data: string): bool &is_used
+	{
+    return manx_c2_match(state, data, Caldera::ManxTCPC2Detected, "Potential Manx TCP C2 activity detected.");
 	}
 
 function manx_udp_c2_match(state: signature_state, data: string): bool &is_used
 	{
-    NOTICE([
-        $conn = state$conn,
-        $note = Caldera::ManxUDPC2Detected,
-        $msg = "Potential Manx UDP C2 activity detected.",
-        $sub = data,
-        $identifier=state$conn$uid
-    ]);
-
-    return T;
+    return manx_c2_match(state, data, Caldera::ManxUDPC2Detected, "Potential Manx UDP C2 activity detected.");
 	}
 
 function manx_udp_c2_reply_match(state: signature_state, data: string): bool &is_used
 	{
-    NOTICE([
-        $conn = state$conn,
-        $note = Caldera::ManxUDPC2ReplyDetected,
-        $msg = "Potential Manx UDP C2 reply detected.",
-        $sub = data,
-        $identifier=state$conn$uid
-    ]);
-
-    return T;
+    return manx_c2_match(state, data, Caldera::ManxUDPC2ReplyDetected, "Potential Manx UDP C2 reply detected.");
 	}
