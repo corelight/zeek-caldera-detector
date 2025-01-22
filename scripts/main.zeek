@@ -59,8 +59,11 @@ event http_message_done(c: connection, is_orig: bool, stat: http_message_stat) {
     local method = c$http$method;
     local uri = c$http$uri;
 
+	if (method != "POST")
+		return;
+
     # Check for Caldera beacon activity.
-    if (method == "POST" && uri == "/beacon") {
+    if (uri == "/beacon") {
         if (|user_agent| > 0 && /Go-http-client/ in user_agent) {
             NOTICE([
                 $conn = c,
@@ -73,7 +76,7 @@ event http_message_done(c: connection, is_orig: bool, stat: http_message_stat) {
     }
 
     # Check for Ragdoll C2 activity.
-    if (method == "POST" && uri == "/weather") {
+    if (uri == "/weather") {
         if (|user_agent| > 0 && /python-requests\// in user_agent) {
             NOTICE([
                 $conn = c,
