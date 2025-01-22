@@ -39,7 +39,6 @@ event http_header(c: connection, is_orig: bool, original_name: string, name: str
             $note = Caldera::SuspiciousFileDownload,
             $msg = fmt("Caldera file download detected: file '%s', platform '%s', User-Agent '%s'", 
                        c$http$caldera_filename_value, value, c$http$user_agent),
-            $sub = "Caldera Suspicious File Download",
             $identifier=c$uid
         ]);
     }
