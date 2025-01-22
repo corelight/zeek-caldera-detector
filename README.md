@@ -1,4 +1,4 @@
-### Caldera
+### zeek-caldera-detector
 
 This is a Zeek based Caldera detector.  It detects Caldera beacons and agent downloads.
 
