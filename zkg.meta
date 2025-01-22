@@ -1,0 +1,17 @@
+[package]
+script_dir = scripts
+test_command = cd testing && btest -c btest.cfg
+summary = TODO: A summary of Caldera in one line
+description = TODO: A more detailed description of Caldera.
+	It can span multiple lines, with this indentation.
+depends = 
+	zeek >=4.0.0
+
+[template]
+source = https://github.com/zeek/package-template
+version = v3.1.4
+zkg_version = 3.0.1-33
+
+[template_vars]
+name = Caldera
+
