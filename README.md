@@ -1,6 +1,6 @@
 # zeek-caldera-detector
 
-**`zeek-caldera-detector`** is a Zeek-based module for detecting Caldera beacons and agent downloads. It is designed to identify suspicious activities associated with Caldera C2 frameworks, including `Sandcat`, `Ragdoll`, and `Manx`.
+**`zeek-caldera-detector`** is a Zeek-based package for detecting Caldera beacons and agent downloads. It is designed to identify suspicious activities associated with Caldera C2 frameworks, including `Sandcat`, `Ragdoll`, and `Manx`.
 
 This package provides robust mechanisms for monitoring HTTP traffic, detecting beacon patterns, and identifying suspicious file downloads based on pre-defined indicators.
 
