@@ -4,7 +4,7 @@ This is a Zeek based Caldera detector.  It detects Caldera beacons and agent dow
 
 #### Example:
 
-Running the sandcat.pcap in the testing/Traces directory:
+Running the sandcat.pcap in the testing/Traces directory through this logic produces:
 
 ```
 #separator \x09
