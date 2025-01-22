@@ -1,6 +1,6 @@
 ### Caldera
 
-This is a Zeek based Caldera detector.
+This is a Zeek based Caldera detector.  It detects Caldera beacons and agent downloads.
 
 #### Example:
 
