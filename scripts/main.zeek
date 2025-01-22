@@ -25,18 +25,15 @@ event http_header(c: connection, is_orig: bool, original_name: string, name: str
     if (method != "POST" && uri != "/file/download")
 		return;
 
-    # Normalize header names to lowercase for consistency.
-    local header_name = to_lower(name);
-
     # Check for the "file" header and mark caldera_filename if it's suspicious.
-    if (c$http$caldera_filename == F && header_name == "file" && value in suspicious_filenames) {
+    if (c$http$caldera_filename == F && name == "FILE" && value in suspicious_filenames) {
         c$http$caldera_filename = T;
         c$http$caldera_filename_value = value;  # Store the matched filename in a custom field.
         return;
     }
 
     # Check for the "platform" header when a suspicious filename is already detected.
-    if (c$http$caldera_filename == T && header_name == "platform") {
+    if (c$http$caldera_filename == T && name == "PLATFORM") {
         NOTICE([
             $conn = c,
             $note = Caldera::SuspiciousFileDownload,
