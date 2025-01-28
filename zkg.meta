@@ -1,10 +1,8 @@
 [package]
 script_dir = scripts
-test_command = cd testing && btest -c btest.cfg
+test_command = make
 summary = A Zeek based Caldera detector.
 description = A Zeek based Caldera detector.
-depends = 
-	zeek >=4.0.0
 
 [template]
 source = https://github.com/zeek/package-template
