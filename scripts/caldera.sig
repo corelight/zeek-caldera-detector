@@ -14,6 +14,8 @@ signature caldera_manx_udp_c2 {
     eval Caldera::manx_udp_c2_match
 }
 
+# The following can't use requires-reverse-signature because it happens on
+# a different flow than the forward direction.
 signature caldera_manx_udp_c2_reply {
     ip-proto == udp
     payload /roger/
