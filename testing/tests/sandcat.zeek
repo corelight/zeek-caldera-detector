@@ -6,4 +6,6 @@
 # columns to allow robust baseline comparison:
 # @TEST-EXEC: cat conn.log | zeek-cut -m -n local_orig local_resp >conn.log.filtered
 #
-# @TEST-EXEC: btest-diff notice.log
+# Zeek 7.1 adds tracking of unhandled protocols which seems to change some notice uids.
+# @TEST-EXEC: cat notice.log | zeek-cut -m -n uid >notice.log.filtered
+# @TEST-EXEC: btest-diff notice.log.filtered
