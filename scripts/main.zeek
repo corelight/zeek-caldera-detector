@@ -7,7 +7,11 @@ export {
 }
 
 redef enum Notice::Type += {
-	Caldera::C2Detected, Caldera::SuspiciousFileDownload,
+	## Potential MITRE Caldera(tm) C2 detected.
+	Caldera::C2Detected,
+
+	## Potential MITRE Caldera(tm) agent download detected.
+	Caldera::SuspiciousFileDownload,
 };
 
 redef record HTTP::Info += {
